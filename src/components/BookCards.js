@@ -19,7 +19,7 @@ const BookCards = ({book}) => {
                 <div className='text-center'></div>
                 <h5 className='card-title'>{book.authors}</h5>
                 <h6 className='card-title mt-3 '>{book.numberOfPages}{'  '}Pages</h6>
-                <h6 className='card-title'>{book.country}</h6>
+                <h6 className='card-title mt-3'>{book.country}</h6>
                 <h6 className='card-title text-secondary mt-3'>{formatDate(book.released)}</h6>
             </div>
             <div className='card-footer  d-flex justify-content-between'>
@@ -28,11 +28,7 @@ const BookCards = ({book}) => {
               {book.isbn}
 
               </span>
-              {/* Published {''}
-              <span>
-              {formatDate(book.released)}
-
-              </span> */}
+             
                
             </div>
         </div>

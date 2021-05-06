@@ -3,22 +3,45 @@ import instance from '../api/apiConfig';
 import BookCards from '../components/BookCards';
 
 const HomePage = () => {
+     const [books, setBooks] = useState([])
     const [showBooks, setShowBooks]= useState([])
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const getBooks = async () => {
+        try{
+            let {data} = await instance.get('/api/books')
+            setBooks(data);
+        }
+        catch (e){
+            console.log(e);
+        }
+    }
 
     const fetchBooks = async () => {
         try{
             let {data} = await instance.get ('/api/books');
             // console.log('books', data);
             setShowBooks(data);
+            getBooks();
 
         }
         catch (e){
             console.log(e)
         }
     }
-    // useEffect(() => {
-    //     fetchBooks ();
-    //   }, []);
+    useEffect(() => {
+       
+        const foundBook = showBooks.filter(book => {
+            return (
+                book.name.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        })
+        searchTerm === ''? setShowBooks(books) : setShowBooks(foundBook);
+      }, [searchTerm]);
+      const handleChange = (event) => {
+        
+        setSearchTerm(event.target.value);
+   }
     return (
         <div id='home-page'>
             <div className='row text-center mt-3'>
@@ -43,18 +66,19 @@ const HomePage = () => {
               className='form-control'
               id='hero-search'
               placeholder='Search for Game of thrones book'
-              value=''
-              onChange=''
+              value={searchTerm}
+              onChange={handleChange}
             />
           </div>
         </div>
       </div>
+      {/** bookCards */}
       <div className='row'>
       
           {showBooks.map((book,index) => {
               return (
-                <div className='col-sm-12 col-md-3 mt-3'>
-                  <BookCards book={book}/>
+                <div className='col-sm-12 col-md-3 mt-3' key={index} >
+                  <BookCards book={book} />
                   </div>
 
               )

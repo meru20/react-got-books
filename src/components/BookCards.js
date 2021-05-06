@@ -1,17 +1,39 @@
 const BookCards = ({book}) => {
+    const formatDate = (released) => {
+        
+        let date = new Date(released);
+        var output = (date.getMonth()+1)+ "-" + date.getDate()   + "-" + date.getFullYear();
+        
+        
+       
+        return output
+
+
+    }
     return (
         <div className= 'card mb-3'>
             <div className='card-header text-center' >
-                {book.name}
+               <h4>{book.name}</h4> 
             </div>
-            <div className='card-body'>
-                <h4 className='card-title'>{book.authors}</h4>
-                <h5 className='card-title'>{book.numberOfPages}</h5>
-                <h5 className='card-title'>{book.country}</h5>
-                <h6 className='card-title'>{book.isbn}</h6>
+            <div className='card-body text-center'>
+                <div className='text-center'></div>
+                <h5 className='card-title'>{book.authors}</h5>
+                <h6 className='card-title mt-3 '>{book.numberOfPages}{'  '}Pages</h6>
+                <h6 className='card-title'>{book.country}</h6>
+                <h6 className='card-title text-secondary mt-3'>{formatDate(book.released)}</h6>
             </div>
-            <div className='card-footer'>
-                {book.released}
+            <div className='card-footer  d-flex justify-content-between'>
+            ISBN {''}
+              <span>
+              {book.isbn}
+
+              </span>
+              {/* Published {''}
+              <span>
+              {formatDate(book.released)}
+
+              </span> */}
+               
             </div>
         </div>
     )

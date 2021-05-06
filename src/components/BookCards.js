@@ -1,7 +1,7 @@
 const BookCards = ({book}) => {
     return (
         <div className= 'card mb-3'>
-            <div className='card-header text-center'>
+            <div className='card-header text-center' >
                 {book.name}
             </div>
             <div className='card-body'>

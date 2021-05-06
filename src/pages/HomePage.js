@@ -10,6 +10,7 @@ const HomePage = () => {
     const getBooks = async () => {
         try{
             let {data} = await instance.get('/api/books')
+            console.log('data',data)
             setBooks(data);
         }
         catch (e){
